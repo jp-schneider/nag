@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Primary Meta Tags -->
+
+    <meta
+      name="title"
+      content="Neural Atlas Graphs for Dynamic Scene Decomposition and Editing"
+    />
+    <meta
+      name="description"
+      content="We propose Neural Atlas Graphs (NAGs), a hybrid representation where every graph node is a view-dependent neural atlas, facilitating both 2D appearance editing and 3D ordering of scene elements. NAGs achieve state-of-the-art results on Waymo and DAVIS."
+    />
+    <meta
+      name="keywords"
+      content="Neural Atlas Graphs, NAG, Dynamic Scenes, Scene Decomposition, Neural Fields, Creative Editing, Autonomous Driving, Waymo, DAVIS, Princeton University, University of Siegen"
+    />
+    <meta
+      name="author"
+      content="Jan Philipp Schneider, Pratik Singh Bisht, Ilya Chugunov, Andreas Kolb, Michael Moeller, Felix Heide"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:site_name"
+      content="Princeton University / University of Siegen Research"
+    />
+    <meta
+      property="og:title"
+      content="Neural Atlas Graphs for Dynamic Scene Decomposition and Editing"
+    />
+    <meta
+      property="og:description"
+      content="We propose Neural Atlas Graphs (NAGs), a hybrid representation where every graph node is a view-dependent neural atlas, facilitating both 2D appearance editing and 3D ordering of scene elements. NAGs achieve state-of-the-art results on Waymo and DAVIS."
+    />
+    <meta property="og:url" content="https://github.com/jp-schneider/nag" />
+    <meta property="og:image" content="https://github.com/jp-schneider/nag" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Neural Atlas Graphs - Research Preview"
+    />
+    <meta
+      property="article:published_time"
+      content="2024-01-01T00:00:00.000Z"
+    />
+    <meta property="article:author" content="Jan Philipp Schneider" />
+    <meta property="article:section" content="Research" />
+    <meta property="article:tag" content="Neural Atlas Graphs" />
+    <meta property="article:tag" content="Dynamic Scenes" />
+
+    <!-- Academic/Research Specific -->
+    <meta
+      name="citation_title"
+      content="Neural Atlas Graphs for Dynamic Scene Decomposition and Editing"
+    />
+    <meta name="citation_author" content="Schneider, Jan Philipp" />
+    <meta name="citation_author" content="Bisht, Pratik Singh" />
+    <meta name="citation_author" content="Chugunov, Ilya" />
+    <meta name="citation_author" content="Kolb, Andreas" />
+    <meta name="citation_author" content="Moeller, Michael" />
+    <meta name="citation_author" content="Heide, Felix" />
+    <meta name="citation_publication_date" content="2025" />
+    <meta name="citation_conference_title" content="Arxiv" />
+    <meta
+      name="citation_pdf_url"
+      content="https://YOUR_DOMAIN.com/static/pdfs/paper.pdf"
+    />
+
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="msapplication-TileColor" content="#2563eb" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://ajax.googleapis.com" />
+    <link rel="preconnect" href="https://documentcloud.adobe.com" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+
+    <title>
+      Neural Atlas Graphs for Dynamic Scene Decomposition and Editing -
+      Schneider et al. | Academic Research
+    </title>
+
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.png" />
+    <link rel="apple-touch-icon" href="static/images/favicon.png" />
+
+    <!-- Critical CSS - Load synchronously -->
+    <link rel="stylesheet" href="static/css/bulma.min.css" />
+    <link rel="stylesheet" href="static/css/index.css" />
+
+    <!-- Non-critical CSS - Load asynchronously -->
+    <link
+      rel="preload"
+      href="static/css/bulma-carousel.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <link
+      rel="preload"
+      href="static/css/bulma-slider.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <link
+      rel="preload"
+      href="static/css/fontawesome.all.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+
+    <!-- Fallback for browsers that don't support preload -->
+    <noscript>
+      <link rel="stylesheet" href="static/css/bulma-carousel.min.css" />
+      <link rel="stylesheet" href="static/css/bulma-slider.min.css" />
+      <link rel="stylesheet" href="static/css/fontawesome.all.min.css" />
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+      />
+    </noscript>
+
+    <!-- Fonts - Optimized loading -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Defer non-critical JavaScript -->
+    <script
+      defer
+      src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+    ></script>
+    <script
+      defer
+      src="https://documentcloud.adobe.com/view-sdk/main.js"
+    ></script>
+    <script defer src="static/js/fontawesome.all.min.js"></script>
+    <script defer src="static/js/bulma-carousel.min.js"></script>
+    <script defer src="static/js/bulma-slider.min.js"></script>
+    <script defer src="static/js/index.js"></script>
+
+    <script>
+      window.MathJax = {
+        tex: {
+          inlineMath: [
+            ["$", "$"],
+            ["\\(", "\\)"],
+          ], // This enables single $ delimiters
+        },
+        svg: {
+          fontCache: "global",
+        },
+      };
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      id="MathJax-script"
+      async
+    ></script>
+
+    <!-- Structured Data for Academic Papers -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "headline": "Neural Atlas Graphs for Dynamic Scene Decomposition and Editing",
+        "description": "We propose Neural Atlas Graphs (NAGs), a hybrid representation where every graph node is a view-dependent neural atlas, facilitating both 2D appearance editing and 3D ordering of scene elements. NAGs achieve state-of-the-art results on Waymo and DAVIS.",
+        "author": [
+          {
+            "@type": "Person",
+            "name": "Jan Philipp Schneider",
+            "affiliation": {
+              "@type": "Organization",
+              "name": "University of Siegen"
+            }
+          },
+          {
+            "@type": "Person",
+            "name": "Pratik Singh Bisht",
+            "affiliation": {
+              "@type": "Organization",
+              "name": "University of Siegen"
+            }
+          },
+          {
+            "@type": "Person",
+            "name": "Ilya Chugunov",
+            "affiliation": {
+              "@type": "Organization",
+              "name": "Princeton University"
+            }
+          },
+          {
+            "@type": "Person",
+            "name": "Andreas Kolb",
+            "affiliation": {
+              "@type": "Organization",
+              "name": "University of Siegen"
+            }
+          },
+          {
+            "@type": "Person",
+            "name": "Michael Moeller",
+            "affiliation": {
+              "@type": "Organization",
+              "name": "University of Siegen"
+            }
+          },
+          {
+            "@type": "Person",
+            "name": "Felix Heide",
+            "affiliation": {
+              "@type": "Organization",
+              "name": "Princeton University"
+            }
+          }
+        ],
+        "datePublished": "2025-09-18",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Arxiv"
+        },
+        "url": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE",
+        "image": "https://YOUR_DOMAIN.com/static/images/social_preview.png",
+        "keywords": [
+          "Neural Atlas Graphs",
+          "Dynamic Scene Decomposition",
+          "Neural Fields",
+          "Scene Graphs",
+          "Creative Editing"
+        ],
+        "abstract": "Learning editable high-resolution scene representations for dynamic scenes is an open problem with applications across the domains from autonomous driving to creative editing -- the most successful approaches today make a trade-off between editability and supporting scene complexity: neural atlases represent dynamic scenes as two deforming image layers, foreground and background, which are editable in 2D, but break down when multiple objects occlude and interact. In contrast, scene graph models make use of annotated data such as masks and bounding boxes from autonomous‑driving datasets to capture complex 3D spatial relationships, but their implicit volumetric node representations are challenging to edit view-consistently. We propose Neural Atlas Graphs (NAGs), a hybrid high-resolution scene representation, where every graph node is a view‑dependent neural atlas, facilitating both 2D appearance editing and 3D ordering and positioning of scene elements. Fit at test‑time, NAGs achieve state‑of‑the‑art quantitative results on the Waymo Open Dataset -- by 5 dB PSNR increase compared to existing methods -- and make environmental editing possible in high resolution and visual quality -- creating counterfactual driving scenarios with new backgrounds and edited vehicle appearance. We find that the method also generalizes beyond driving scenes and compares favorably - by more than 7 dB in PSNR - to recent matting and video editing baselines on the DAVIS video dataset with a diverse set of human and animal-centric scenes.",
+        "citation": "BIBTEX_CITATION_HERE",
+        "isAccessibleForFree": true,
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "mainEntity": {
+          "@type": "WebPage",
+          "@id": "https://YOUR_DOMAIN.com/YOUR_PROJECT_PAGE"
+        },
+        "about": [
+          {
+            "@type": "Thing",
+            "name": "Computer Vision"
+          },
+          {
+            "@type": "Thing",
+            "name": "Video Editing"
+          },
+          {
+            "@type": "Thing",
+            "name": "Machine Learning"
+          },
+          {
+            "@type": "Thing",
+            "name": "3D Reconstruction"
+          },
+          {
+            "@type": "Thing",
+            "name": "Neural Fields"
+          },
+          {
+            "@type": "Thing",
+            "name": "Scene Decomposition"
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Scroll to Top Button -->
+    <button
+      class="scroll-to-top"
+      onclick="scrollToTop()"
+      title="Scroll to top"
+      aria-label="Scroll to top"
+    >
+      <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <main id="main-content">
+      <section class="hero">
+        <div class="hero-body">
+          <div class="container is-max-desktop">
+            <div class="columns is-centered">
+              <div class="column has-text-centered">
+                <h1 class="title is-1 publication-title">
+                  Neural Atlas Graphs <br />
+                  for Dynamic Scene Decomposition and Editing
+                </h1>
+                <div class="is-size-5 publication-authors">
+                  <span class="author-block">
+                    <a href="https://github.com/jp-schneider" target="_blank"
+                      >Jan Philipp Schneider</a
+                    >,
+                  </span>
+                  <span class="author-block">
+                    <a href="#" target="_blank">Pratik Singh Bisht</a>,
+                  </span>
+                  <span class="author-block">
+                    <a href="https://ilyac.info/" target="_blank"
+                      >Ilya Chugunov</a
+                    >,
+                  </span>
+                  <br />
+                  <span class="author-block">
+                    <a
+                      href="https://www.cg.informatik.uni-siegen.de/de/kolb-andreas"
+                      target="_blank"
+                      >Andreas Kolb</a
+                    >,
+                  </span>
+                  <span class="author-block">
+                    <a
+                      href="https://sites.google.com/site/michaelmoellermath/"
+                      target="_blank"
+                      >Michael Moeller</a
+                    >,
+                  </span>
+                  <span class="author-block">
+                    <a
+                      href="https://www.cs.princeton.edu/~fheide/"
+                      target="_blank"
+                      >Felix Heide</a
+                    >
+                  </span>
+                </div>
+
+                <div class="column has-text-centered">
+                  <div class="publication-links">
+                    <!-- TODO: Update with your arXiv paper ID -->
+                    <span class="link-block">
+                      <a
+                        href="https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf"
+                        target="_blank"
+                        class="external-link button is-normal is-rounded is-dark button-shadow"
+                      >
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+
+                    <!-- TODO: Add your supplementary material PDF or remove this section -->
+                    <span class="link-block">
+                      <a
+                        href="static/pdfs/nag-supplementary.pdf"
+                        target="_blank"
+                        class="external-link button is-normal is-rounded is-dark"
+                      >
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Supplementary</span>
+                      </a>
+                    </span>
+
+                    <!-- TODO: Replace with your GitHub repository URL -->
+                    <span class="link-block">
+                      <a
+                        href="https://github.com/jp-schneider/nag"
+                        target="_blank"
+                        class="external-link button is-normal is-rounded is-dark"
+                      >
+                        <span class="icon">
+                          <i class="fab fa-github"></i>
+                        </span>
+                        <span>Code</span>
+                      </a>
+                    </span>
+
+                    <!-- TODO: Update with your arXiv paper ID -->
+                    <span class="link-block">
+                      <a
+                        href="https://arxiv.org/abs/<ARXIV PAPER ID>"
+                        target="_blank"
+                        class="external-link button is-normal is-rounded is-dark"
+                      >
+                        <span class="icon">
+                          <i class="ai ai-arxiv"></i>
+                        </span>
+                        <span>arXiv</span>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Teaser video-->
+      <section class="hero teaser">
+        <div class="container is-max-desktop">
+          <div class="hero-body">
+            <video
+              poster=""
+              id="tree"
+              autoplay
+              controls
+              muted
+              loop
+              height="100%"
+              preload="metadata"
+            >
+              <source src="static/videos/overview.mp4" type="video/mp4" />
+            </video>
+
+            <div class="box is-size-6 has-text-justified mt-5">
+              <p>
+                <strong>Neural Atlas Graphs (NAGs)</strong> are a hybrid
+                <strong>2.5D</strong> representation for high-resolution and
+                editable dynamic scenes. Features include:
+                <strong>counterfactual autonomous driving</strong> (texturized
+                background),
+                <strong>quantitative quality comparisons</strong> (vs.
+                OmniRe/EmeNeRF), and robust
+                <strong>3D scene manipulation</strong> (decomposition, car
+                manipulation). Crucially, appearance changes are applied via
+                <strong>single-frame texture editing</strong>, maintaining
+                <strong>view-consistent temporal coherence</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End teaser video -->
+
+      <section class="section hero is-light">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Abstract</h2>
+              <div class="content has-text-justified">
+                <p>
+                  Learning editable high-resolution scene representations for
+                  dynamic scenes is an open problem with applications across the
+                  domains from autonomous driving to creative editing - the most
+                  successful approaches today make a trade-off between
+                  editability and supporting scene complexity: neural atlases
+                  represent dynamic scenes as two deforming image layers,
+                  foreground and background, which are editable in 2D, but break
+                  down when multiple objects occlude and interact. In contrast,
+                  scene graph models make use of annotated data such as masks
+                  and bounding boxes from autonomous‑driving datasets to capture
+                  complex 3D spatial relationships, but their implicit
+                  volumetric node representations are challenging to edit
+                  view-consistently. We propose Neural Atlas Graphs (NAGs), a
+                  hybrid high-resolution scene representation, where every graph
+                  node is a view‑dependent neural atlas, facilitating both 2D
+                  appearance editing and 3D ordering and positioning of scene
+                  elements. Fit at test‑time, NAGs achieve state‑of‑the‑art
+                  quantitative results on the Waymo Open Dataset - by 5 dB PSNR
+                  increase compared to existing methods - and make environmental
+                  editing possible in high resolution and visual quality -
+                  creating counterfactual driving scenarios with new backgrounds
+                  and edited vehicle appearance. We find that the method also
+                  generalizes beyond driving scenes and compares favorably - by
+                  more than 7 dB in PSNR - to recent matting and video editing
+                  baselines on the DAVIS video dataset with a diverse set of
+                  human and animal-centric scenes.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End paper abstract -->
+      <section class="section">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 has-text-centered">Neural Atlas Graphs</h2>
+
+          <div class="content is-size-5">
+            <p>
+              Neural Atlas Graphs (NAG) are a hybrid scene representation that
+              decomposes a dynamic scene into a graph of moving planes in 3D
+              space, supporting 3D ordering and flexible 2D texture editing,
+              while simultaneously maintaining view-consistent temporal
+              coherence.
+            </p>
+          </div>
+
+          <div class="item columns is-centered has-text-centered">
+            <div class="column">
+              <figure class="image">
+                <img
+                  src="static/images/nag-method.svg"
+                  alt="Figure: Neural Atlas Graphs Concept"
+                  style="width: 200%; height: auto"
+                />
+              </figure>
+              <div class="box is-size-7 has-text-justified mt-4">
+                <p>
+                  <strong>Neural Atlas Graphs (NAGs) Concept.</strong> A NAG
+                  represents dynamic scenes as a graph of moving 3D planes (one
+                  per object/background). Each plane acts as an editable,
+                  view-dependent <strong>Neural Atlas</strong> encoding
+                  appearance and flow $f_i$ along a learned trajectory $g_i$
+                  within dedicated neural fields, enabling view-consistent
+                  rendering via depth-ordered ray casting.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <section class="hero is-small is-light">
+        <div class="hero-body">
+          <div class="container">
+            <h2 class="title is-3 has-text-centered">
+              Qualitative Comparisons
+            </h2>
+          </div>
+        </div>
+      </section>
+
+      <!-- Video carousel -->
+      <section class="hero is-small">
+        <div class="hero-body">
+          <div class="container">
+            <h2 class="title is-3 has-text-centered">Texture Edits</h2>
+            <div class="container is-max-desktop content is-size-5">
+              <p>
+                A key advantage of decomposing the dynamic scene into editable
+                Neural Atlas nodes is the ease of direct appearance
+                modification. Unlike implicit volumetric representations which
+                are challenging to edit, our method allows us to treat each
+                atlas node as a 2D texture map for foreground or background
+                elements. <br />
+                We showcase the system's capacity to perform complex, realistic
+                texture transfers and color alterations on major environmental
+                components. Given a new texture for one frame in the input
+                video, we propagate this information to the corresponding Neural
+                Atlas node. The texture is then accurately projected and
+                deformed across the object's planar surface for all novel views,
+                thanks to the learned planar flow. This fine-grained control
+                allows for both illustrative edits, such as simply recoloring
+                the swan to a white or rainbow color, and more practical,
+                realistic edits, such as putting speed limits or traffic control
+                instructions directly onto streets. This capability is
+                especially valuable for creating counterfactual driving
+                scenarios and testing the safety and robustness of autonomous
+                driving simulators.
+              </p>
+            </div>
+
+            <div id="results-carousel" class="carousel results-carousel">
+              <div class="item item-video1 sync-group">
+                <div class="columns is-multiline is-centered">
+                  <div class="column is-10 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/swan/poster/blackswan_gt_005_t.jpg"
+                        id="video_blackswan_edit_gt"
+                        class="sync-video master-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="none"
+                      >
+                        <source
+                          src="static/videos/edits/swan/blackswan_GT.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Ground Truth
+                      </p>
+                    </figure>
+                  </div>
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/swan/poster/blackswan_white_005_t.png"
+                        id="video_blackswan_edit_white"
+                        class="sync-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="none"
+                      >
+                        <source
+                          src="static/videos/edits/swan/blackswan_white_Ours.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        White Edit
+                      </p>
+                    </figure>
+                  </div>
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/swan/poster/blackswan_rainbow_005_t.png"
+                        id="video_blackswan_edit_rainbow"
+                        class="sync-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="none"
+                      >
+                        <source
+                          src="static/videos/edits/swan/blackswan_rainbow_Ours.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Rainbow Edit
+                      </p>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+              <div class="item item-video2 sync-group">
+                <div class="columns is-multiline is-centered">
+                  <div class="column is-10 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/boat/poster/boat_gt_000_t.jpg"
+                        id="video_boat_edit_gt"
+                        class="sync-video master-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="metadata"
+                      >
+                        <source
+                          src="static/videos/edits/boat/boat_GT.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Ground Truth
+                      </p>
+                    </figure>
+                  </div>
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/boat/poster/boat_red_000_t.png"
+                        id="video_boat_edit_red"
+                        class="sync-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="metadata"
+                      >
+                        <source
+                          src="static/videos/edits/boat/boat_red_Ours.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Red Edit
+                      </p>
+                    </figure>
+                  </div>
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/boat/poster/boat_rainbow_000_t.png"
+                        id="video_boat_edit_rainbow"
+                        class="sync-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="metadata"
+                      >
+                        <source
+                          src="static/videos/edits/boat/boat_rainbow_Ours.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Rainbow Edit
+                      </p>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+              <div class="item item-video3 sync-group">
+                <div class="columns is-multiline is-centered">
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/sign/poster/W203_060_010_GT.png"
+                        id="video_sign_edit_gt"
+                        class="sync-video master-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="none"
+                      >
+                        <source
+                          src="static/videos/edits/sign/s-203_060_00_GT.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Ground Truth
+                      </p>
+                    </figure>
+                  </div>
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/sign/poster/W203_060_010_edit.png"
+                        id="video_sign_edit"
+                        class="sync-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="none"
+                      >
+                        <source
+                          src="static/videos/edits/sign/s-203_060_Ours.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Edited Scene
+                      </p>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- End video carousel -->
+      <!--BibTex citation -->
+      <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <div class="bibtex-header">
+            <h2 class="title">BibTeX</h2>
+            <button
+              class="copy-bibtex-btn"
+              onclick="copyBibTeX()"
+              title="Copy BibTeX to clipboard"
+            >
+              <i class="fas fa-copy"></i>
+              <span class="copy-text">Copy</span>
+            </button>
+          </div>
+          <pre id="bibtex-code"><code>@article{Schneider2025NAG,
+  author    = {Jan Philipp Schneider and
+              Pratik Singh Bisht and
+              Ilya Chugunov and
+              Andreas Kolb and
+              Michael Moeller and
+              Felix Heide},
+  title     = {Neural Atlas Graphs for Dynamic Scene Decomposition and Editing},
+  journal   = {arXiv preprint arXiv:2501.XXXXX},
+  year      = {2025},
+  url       = {https://arxiv.org/abs/2501.XXXXX},
+}</code></pre>
+        </div>
+      </section>
+      <!--End BibTex citation -->
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p>
+                This page is maintained by Jan Philipp Schneider. For any
+                questions or suggestions, please contact him under the contact
+                options provided
+                <a
+                  href="https://www.vsa.informatik.uni-siegen.de/en/schneider-jan-philipp"
+                  target="_blank"
+                  >here</a
+                >. Further, it was built using the
+                <a
+                  href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                  target="_blank"
+                  >Academic Project Page Template</a
+                >, adopted from the <a
+                  href="https://nerfies.github.io"
+                  target="_blank"
+                  >Nerfies</a
+                > project page.<br />
+                This website is licensed under a
+                <a
+                  rel="license"
+                  href="http://creativecommons.org/licenses/by-sa/4.0/"
+                  target="_blank"
+                  >Creative Commons Attribution-ShareAlike 4.0 International
+                  License</a
+                >, while its contents are licensed under a
+                <a rel="license" href="static/license.txt" target="_blank"
+                  >MIT License</a
+                >.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="static/js/sync_videos.js"></script>
+  </body>
+</html>

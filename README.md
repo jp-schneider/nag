@@ -1,6 +1,6 @@
 <div align="center" style="padding: 20px 0; border-bottom: 2px solid #EEEEEE; margin-bottom: 20px;">
     <h1 style="color: #2c3e50; font-size: 2.2em; margin-bottom: 0.2em;">
-        Neural Atlas Graphs for Dynamic Scene Decomposition and Editing
+        Neural Atlas Graphs </br> for Dynamic Scene Decomposition and Editing
     </h1>
     <p style="font-size: 1.1em; color: #34495e; margin-top: 15px; margin-bottom: 5px;">
         <a href="./README.md" style="color: #34495e; text-decoration: none;"><strong>Jan Philipp Schneider</strong></a><sup>1,2</sup>,
