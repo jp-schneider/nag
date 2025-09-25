@@ -346,6 +346,11 @@
                     >
                   </span>
                 </div>
+                <div class="column has-text-centered">
+                  <div class="is-size-5">
+                    <p>NeurIPS 2025 (spotlight)</p>
+                  </div>
+                </div>
 
                 <div class="column has-text-centered">
                   <div class="publication-links">
@@ -522,6 +527,275 @@
       </section>
 
       <section class="hero is-small is-light">
+        <div class="hero-body">
+          <div class="container">
+            <h2 class="title is-3 has-text-centered">Texture Edits</h2>
+            <div class="container is-max-desktop content is-size-5">
+              <p>
+                A key advantage of decomposing the dynamic scene into editable
+                Neural Atlas nodes is the ease of direct appearance
+                modification. Unlike implicit volumetric representations which
+                are challenging to edit, our method allows us to treat each
+                atlas node as a 2D texture map for foreground or background
+                elements. <br />
+                We showcase the system's capacity to perform complex, realistic
+                texture transfers and color alterations on major environmental
+                components. Given a new texture for one frame in the input
+                video, we propagate this information to the corresponding Neural
+                Atlas node. The texture is then accurately projected and
+                deformed across the object's planar surface for all novel views,
+                thanks to the learned planar flow. This fine-grained control
+                allows for both illustrative edits, such as simply recoloring
+                the swan to a white or rainbow color, and more practical,
+                realistic edits, such as putting speed limits or traffic control
+                instructions directly onto streets. This capability is
+                especially valuable for creating counterfactual driving
+                scenarios and testing the safety and robustness of autonomous
+                driving simulators.
+              </p>
+            </div>
+
+            <div id="texture-edit-carousel" class="carousel results-carousel">
+              <div class="item item-video1 sync-group">
+                <div class="columns is-multiline is-centered">
+                  <div class="column is-10 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/swan/poster/blackswan_gt_005_t.jpg"
+                        id="video_blackswan_edit_gt"
+                        class="sync-video master-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="none"
+                      >
+                        <source
+                          src="static/videos/edits/swan/blackswan_GT.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Ground Truth
+                      </p>
+                    </figure>
+                  </div>
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/swan/poster/blackswan_white_005_t.jpg"
+                        id="video_blackswan_edit_white"
+                        class="sync-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="none"
+                      >
+                        <source
+                          src="static/videos/edits/swan/blackswan_white_Ours.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        White Edit
+                      </p>
+                    </figure>
+                  </div>
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/swan/poster/blackswan_rainbow_005_t.jpg"
+                        id="video_blackswan_edit_rainbow"
+                        class="sync-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="none"
+                      >
+                        <source
+                          src="static/videos/edits/swan/blackswan_rainbow_Ours.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Rainbow Edit
+                      </p>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+              <div class="item item-video2 sync-group">
+                <div class="columns is-multiline is-centered">
+                  <div class="column is-10 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/boat/poster/boat_gt_000_t.jpg"
+                        id="video_boat_edit_gt"
+                        class="sync-video master-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="metadata"
+                      >
+                        <source
+                          src="static/videos/edits/boat/boat_GT.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Ground Truth
+                      </p>
+                    </figure>
+                  </div>
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/boat/poster/boat_red_000_t.jpg"
+                        id="video_boat_edit_red"
+                        class="sync-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="metadata"
+                      >
+                        <source
+                          src="static/videos/edits/boat/boat_red_Ours.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Red Edit
+                      </p>
+                    </figure>
+                  </div>
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/boat/poster/boat_rainbow_000_t.jpg"
+                        id="video_boat_edit_rainbow"
+                        class="sync-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="metadata"
+                      >
+                        <source
+                          src="static/videos/edits/boat/boat_rainbow_Ours.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Rainbow Edit
+                      </p>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+              <div class="item item-video3">
+                <div class="columns is-multiline is-centered sync-group">
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/sign/poster/W203_060_010_GT.jpg"
+                        id="video_sign_edit_gt"
+                        class="sync-video master-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="none"
+                      >
+                        <source
+                          src="static/videos/edits/sign/s-203_060_00_GT.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Ground Truth
+                      </p>
+                    </figure>
+                  </div>
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/sign/poster/W203_060_010_edit.png"
+                        id="video_sign_edit"
+                        class="sync-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="none"
+                      >
+                        <source
+                          src="static/videos/edits/sign/s-203_060_Ours.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Edited Scene
+                      </p>
+                    </figure>
+                  </div>
+                </div>
+                <div class="columns is-multiline is-centered sync-group">
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/cars/poster/s-125_000_00_GT.jpg"
+                        id="video_sign_edit_gt"
+                        class="sync-video master-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="none"
+                      >
+                        <source
+                          src="static/videos/edits/cars/s-125_000_00_GT.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Ground Truth
+                      </p>
+                    </figure>
+                  </div>
+                  <div class="column is-5 has-text-centered">
+                    <figure class="image">
+                      <video
+                        poster="static/videos/edits/cars/poster/s-125_000_Ours.jpg"
+                        id="video_sign_edit"
+                        class="sync-video"
+                        controls
+                        muted
+                        loop
+                        width="100%"
+                        preload="none"
+                      >
+                        <source
+                          src="static/videos/edits/cars/s-125_000_Ours.mp4"
+                          type="video/mp4"
+                        />
+                      </video>
+                      <p class="has-text-centered subtitle is-6 mt-2">
+                        Edited Scene
+                      </p>
+                    </figure>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero is-small">
         <div class="hero-body">
           <div class="container">
             <h2 class="title is-3 has-text-centered">
@@ -1555,7 +1829,7 @@
           </div>
         </div>
       </section>
-      <section class="hero is-small">
+      <section class="hero is-small is-light">
         <div class="hero-body">
           <div class="container">
             <h2 class="title is-3 has-text-centered mt-6">
@@ -2127,277 +2401,6 @@
           </div>
         </div>
       </section>
-
-      <!-- Video carousel -->
-      <section class="hero is-small">
-        <div class="hero-body">
-          <div class="container">
-            <h2 class="title is-3 has-text-centered">Texture Edits</h2>
-            <div class="container is-max-desktop content is-size-5">
-              <p>
-                A key advantage of decomposing the dynamic scene into editable
-                Neural Atlas nodes is the ease of direct appearance
-                modification. Unlike implicit volumetric representations which
-                are challenging to edit, our method allows us to treat each
-                atlas node as a 2D texture map for foreground or background
-                elements. <br />
-                We showcase the system's capacity to perform complex, realistic
-                texture transfers and color alterations on major environmental
-                components. Given a new texture for one frame in the input
-                video, we propagate this information to the corresponding Neural
-                Atlas node. The texture is then accurately projected and
-                deformed across the object's planar surface for all novel views,
-                thanks to the learned planar flow. This fine-grained control
-                allows for both illustrative edits, such as simply recoloring
-                the swan to a white or rainbow color, and more practical,
-                realistic edits, such as putting speed limits or traffic control
-                instructions directly onto streets. This capability is
-                especially valuable for creating counterfactual driving
-                scenarios and testing the safety and robustness of autonomous
-                driving simulators.
-              </p>
-            </div>
-
-            <div id="texture-edit-carousel" class="carousel results-carousel">
-              <div class="item item-video1 sync-group">
-                <div class="columns is-multiline is-centered">
-                  <div class="column is-10 has-text-centered">
-                    <figure class="image">
-                      <video
-                        poster="static/videos/edits/swan/poster/blackswan_gt_005_t.jpg"
-                        id="video_blackswan_edit_gt"
-                        class="sync-video master-video"
-                        controls
-                        muted
-                        loop
-                        width="100%"
-                        preload="none"
-                      >
-                        <source
-                          src="static/videos/edits/swan/blackswan_GT.mp4"
-                          type="video/mp4"
-                        />
-                      </video>
-                      <p class="has-text-centered subtitle is-6 mt-2">
-                        Ground Truth
-                      </p>
-                    </figure>
-                  </div>
-                  <div class="column is-5 has-text-centered">
-                    <figure class="image">
-                      <video
-                        poster="static/videos/edits/swan/poster/blackswan_white_005_t.jpg"
-                        id="video_blackswan_edit_white"
-                        class="sync-video"
-                        controls
-                        muted
-                        loop
-                        width="100%"
-                        preload="none"
-                      >
-                        <source
-                          src="static/videos/edits/swan/blackswan_white_Ours.mp4"
-                          type="video/mp4"
-                        />
-                      </video>
-                      <p class="has-text-centered subtitle is-6 mt-2">
-                        White Edit
-                      </p>
-                    </figure>
-                  </div>
-                  <div class="column is-5 has-text-centered">
-                    <figure class="image">
-                      <video
-                        poster="static/videos/edits/swan/poster/blackswan_rainbow_005_t.jpg"
-                        id="video_blackswan_edit_rainbow"
-                        class="sync-video"
-                        controls
-                        muted
-                        loop
-                        width="100%"
-                        preload="none"
-                      >
-                        <source
-                          src="static/videos/edits/swan/blackswan_rainbow_Ours.mp4"
-                          type="video/mp4"
-                        />
-                      </video>
-                      <p class="has-text-centered subtitle is-6 mt-2">
-                        Rainbow Edit
-                      </p>
-                    </figure>
-                  </div>
-                </div>
-              </div>
-              <div class="item item-video2 sync-group">
-                <div class="columns is-multiline is-centered">
-                  <div class="column is-10 has-text-centered">
-                    <figure class="image">
-                      <video
-                        poster="static/videos/edits/boat/poster/boat_gt_000_t.jpg"
-                        id="video_boat_edit_gt"
-                        class="sync-video master-video"
-                        controls
-                        muted
-                        loop
-                        width="100%"
-                        preload="metadata"
-                      >
-                        <source
-                          src="static/videos/edits/boat/boat_GT.mp4"
-                          type="video/mp4"
-                        />
-                      </video>
-                      <p class="has-text-centered subtitle is-6 mt-2">
-                        Ground Truth
-                      </p>
-                    </figure>
-                  </div>
-                  <div class="column is-5 has-text-centered">
-                    <figure class="image">
-                      <video
-                        poster="static/videos/edits/boat/poster/boat_red_000_t.jpg"
-                        id="video_boat_edit_red"
-                        class="sync-video"
-                        controls
-                        muted
-                        loop
-                        width="100%"
-                        preload="metadata"
-                      >
-                        <source
-                          src="static/videos/edits/boat/boat_red_Ours.mp4"
-                          type="video/mp4"
-                        />
-                      </video>
-                      <p class="has-text-centered subtitle is-6 mt-2">
-                        Red Edit
-                      </p>
-                    </figure>
-                  </div>
-                  <div class="column is-5 has-text-centered">
-                    <figure class="image">
-                      <video
-                        poster="static/videos/edits/boat/poster/boat_rainbow_000_t.jpg"
-                        id="video_boat_edit_rainbow"
-                        class="sync-video"
-                        controls
-                        muted
-                        loop
-                        width="100%"
-                        preload="metadata"
-                      >
-                        <source
-                          src="static/videos/edits/boat/boat_rainbow_Ours.mp4"
-                          type="video/mp4"
-                        />
-                      </video>
-                      <p class="has-text-centered subtitle is-6 mt-2">
-                        Rainbow Edit
-                      </p>
-                    </figure>
-                  </div>
-                </div>
-              </div>
-              <div class="item item-video3">
-                <div class="columns is-multiline is-centered sync-group">
-                  <div class="column is-5 has-text-centered">
-                    <figure class="image">
-                      <video
-                        poster="static/videos/edits/sign/poster/W203_060_010_GT.jpg"
-                        id="video_sign_edit_gt"
-                        class="sync-video master-video"
-                        controls
-                        muted
-                        loop
-                        width="100%"
-                        preload="none"
-                      >
-                        <source
-                          src="static/videos/edits/sign/s-203_060_00_GT.mp4"
-                          type="video/mp4"
-                        />
-                      </video>
-                      <p class="has-text-centered subtitle is-6 mt-2">
-                        Ground Truth
-                      </p>
-                    </figure>
-                  </div>
-                  <div class="column is-5 has-text-centered">
-                    <figure class="image">
-                      <video
-                        poster="static/videos/edits/sign/poster/W203_060_010_edit.png"
-                        id="video_sign_edit"
-                        class="sync-video"
-                        controls
-                        muted
-                        loop
-                        width="100%"
-                        preload="none"
-                      >
-                        <source
-                          src="static/videos/edits/sign/s-203_060_Ours.mp4"
-                          type="video/mp4"
-                        />
-                      </video>
-                      <p class="has-text-centered subtitle is-6 mt-2">
-                        Edited Scene
-                      </p>
-                    </figure>
-                  </div>
-                </div>
-                <div class="columns is-multiline is-centered sync-group">
-                  <div class="column is-5 has-text-centered">
-                    <figure class="image">
-                      <video
-                        poster="static/videos/edits/cars/poster/s-125_000_00_GT.jpg"
-                        id="video_sign_edit_gt"
-                        class="sync-video master-video"
-                        controls
-                        muted
-                        loop
-                        width="100%"
-                        preload="none"
-                      >
-                        <source
-                          src="static/videos/edits/cars/s-125_000_00_GT.mp4"
-                          type="video/mp4"
-                        />
-                      </video>
-                      <p class="has-text-centered subtitle is-6 mt-2">
-                        Ground Truth
-                      </p>
-                    </figure>
-                  </div>
-                  <div class="column is-5 has-text-centered">
-                    <figure class="image">
-                      <video
-                        poster="static/videos/edits/cars/poster/s-125_000_Ours.jpg"
-                        id="video_sign_edit"
-                        class="sync-video"
-                        controls
-                        muted
-                        loop
-                        width="100%"
-                        preload="none"
-                      >
-                        <source
-                          src="static/videos/edits/cars/s-125_000_Ours.mp4"
-                          type="video/mp4"
-                        />
-                      </video>
-                      <p class="has-text-centered subtitle is-6 mt-2">
-                        Edited Scene
-                      </p>
-                    </figure>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- End video carousel -->
       <!--BibTex citation -->
       <section class="section" id="BibTeX">
         <div class="container is-max-desktop content">

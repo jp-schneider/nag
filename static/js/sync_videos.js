@@ -13,9 +13,11 @@ function is_group_ready(group) {
         groupVideos.forEach(video => {
             if (video.readyState >= HTMLMediaElement.HAVE_ENOUGH_DATA) { // readyState 4 means `HAVE_ENOUGH_DATA`
                 videosLoaded++;
+                //console.log("Video is loaded HAVE_ENOUGH_DATA: ", video.id)
             } else {
                 video.addEventListener('canplaythrough', () => {
                     videosLoaded++;
+                    //console.log("Video is loaded canplaythrough: ", video.id)
                     if (videosLoaded === totalVideos) {
                         resolve();
                     }
@@ -27,7 +29,7 @@ function is_group_ready(group) {
     });
 };
 
-window.startCarouselAutoplayWhenReady = (carouselInstance) => {
+function startCarouselAutoplayWhenReady(carouselInstance) {
     // Find the currently active item within the carousel
     const activeItem = carouselInstance.items.find(item => item.classList.contains('is-active'));
     if (!activeItem) {
@@ -169,6 +171,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         setupSyncGroup(group); 
         observer.observe(group);
     });
+
+    //startCarouselAutoplayWhenReady(textureEditCarousel)
 
 
 });
