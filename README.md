@@ -23,7 +23,7 @@
 
 A dedicated project webpage, including high-resolution visuals, videos, and interactive examples, is available via GitHub Pages:
 
-[Neural Atlas Graphs](https://jp-schneider.github.io/nag)
+[Neural Atlas Graphs](https://princeton-computational-imaging.github.io/nag/)
 
 
 ## 🏗️ Code Status
