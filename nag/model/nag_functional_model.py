@@ -1123,8 +1123,37 @@ class NAGFunctionalModel(NAGModel):
                                     t: torch.Tensor,
                                     enabled_objects: torch.Tensor,
                                     enabled_background: bool = True,
-                                    enabled_aberration: bool = True,
-                                    ):
+                                    enabled_aberration: bool = False,
+                                    ) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, int]:
+        """
+        Combines object data into tensors.
+        1. the rigid data e.g. global position matricies for the enabled objects, background as well as camera.  
+        2. the local plane scale for the enabled objects and background
+        3. the local plane scale offset for the enabled objects and background
+        4. the camera index in the returned
+        
+        
+        Parameters
+        ----------
+        t : torch.Tensor
+            The time steps to compute the rigid data for. Shape (T,)
+        enabled_objects : torch.Tensor
+            Which objects are enabled. Shape (N,), N number of total objects
+        enabled_background : bool, optional
+            If background plane shall be included, by default True
+        enabled_aberration : bool, optional
+            If aberration plane shall be included, by default False
+
+        Returns
+        -------
+        Tuple[torch.Tensor, torch.Tensor, torch.Tensor, int]
+            1. the rigid data e.g. global position matricies for the enabled objects, background as well as camera. Shape (SOBC, T, 4, 4)
+            2. the local plane scale for the enabled objects and background. Shape (SOB, 2)
+            3. the local plane scale offset for the enabled objects and background. Shape (SOB, 2)
+            4. the camera index in the returned 
+
+            Where T is the number of time steps, SOBC is the number of selected objects + optional background + camera, SOB is the number of selected objects + optional background.
+        """
         device = enabled_objects.device
         # enabled_objects_cam = torch.cat(
         #     [enabled_objects, torch.tensor([True], dtype=torch.bool, device=device)])
@@ -1158,8 +1187,6 @@ class NAGFunctionalModel(NAGModel):
         # if self.config.has_camera_aberration_plane:
         #     enabled_objects_back = torch.cat([enabled_objects_back, torch.tensor(
         #         [enabled_aberration], dtype=torch.bool, device=device)])
-
-        # Compute global rays
 
         O = enabled_objects.sum()
         T = len(t)
@@ -1398,9 +1425,7 @@ class NAGFunctionalModel(NAGModel):
         if self.camera_idx != self._translations.shape[0] - 1:
             raise ValueError(
                 "Camera index is not the last index in translations.")
-        CIDX = enabled_objects_cam.sum() - 1
-
-        global_positions, local_plane_scale, local_plane_scale_offset = self._assemble_object_rigid_data(
+        global_positions, local_plane_scale, local_plane_scale_offset, CIDX = self._assemble_object_rigid_data(
             t, enabled_objects, enabled_background)
 
         global_ray_origins, global_ray_directions, _, OB_mask, intersection_points, is_inside, _, _ = plane_hits(
