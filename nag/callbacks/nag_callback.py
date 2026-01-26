@@ -1150,7 +1150,7 @@ class NAGCallback(pl.Callback):
                         if k not in merged_results:
                             merged_results[k] = []
                         merged_results[k].append(v)
-                merged_results = {k: tocalculate_mask_metrics_from_pathsrch.cat(v, dim=0)
+                merged_results = {k: torch.cat(v, dim=0)
                                   for k, v in merged_results.items()}
 
                 mask_ids = self.runner.dataset.mask_ids
