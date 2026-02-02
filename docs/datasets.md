@@ -45,3 +45,7 @@ Make sure to adjust the path if your datasets are located elsewhere on your syst
 >
 
 For more details on how to use the datasets with our training scripts, please refer to the [Training Instructions](./training.md).
+
+## Custom Dataset Preparation
+
+If you wish to prepare further Waymo segments for training or convert additional Davis sequences, we refer to the [Waymo Dataset Preparation Guide](./waymo_dataset_extraction.md) and the [Davis Dataset Preparation Guide](./davis_dataset_preparation.md) for detailed instructions on how to do so.
