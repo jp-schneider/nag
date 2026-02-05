@@ -1,4 +1,10 @@
 [submodule "tools"]
 	path = tools
 	url = https://github.com/jp-schneider/tools.git
-	branch = nag
+	branch = main
+[submodule "libs/x-anylabeling"]
+	path = libs/x-anylabeling
+	url = https://github.com/jp-schneider/x-anylabeling.git
+[submodule "libs/nag-waymo-processing"]
+	path = libs/nag-waymo-processing
+	url = https://github.com/jp-schneider/nag-waymo-processing.git
