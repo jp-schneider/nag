@@ -92,7 +92,7 @@ To build and install tinycudann, first clone our modified repository, ideally ou
 
 ```bash
 cd ..
-git clone https://github.com/jp-schneider/tiny-cuda-nn-float32.git  
+git clone --recursive https://github.com/jp-schneider/tiny-cuda-nn-float32.git  
 ```
 
 Navigate to the cloned directory and build the package, for details we refer to the original tinycudann [readme](https://github.com/jp-schneider/tiny-cuda-nn-float32/blob/master/README.md). Make sure to build it locally, with the used CUDA toolkit on the PATH and properly set LD_LIBRARY_PATH. If you have multiple CUDA versions installed, make sure to use the one matching your pytorch installation and the one you intend to use with NAG.
