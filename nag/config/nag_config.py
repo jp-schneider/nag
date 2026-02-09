@@ -29,12 +29,12 @@ def default_phases() -> List[Phase]:
                             is_lr_scheduler_active=False,
                             length=5,
                             name="position_only",
-                            plane_normal_rescaling_hook='nsf.model.hooks.alpha_chain_scaling_hook',
+                            plane_normal_rescaling_hook='nag.model.hooks.alpha_chain_scaling_hook',
                             plane_normal_rescaling_hook_kwargs=dict(
                                 alpha_chain_scaling=True,
                                 total_hit_scaling=True
                             ),
-                            plane_position_rescaling_hook='nsf.model.hooks.alpha_chain_scaling_hook',
+                            plane_position_rescaling_hook='nag.model.hooks.alpha_chain_scaling_hook',
                             plane_position_rescaling_hook_kwargs=dict(
                                 alpha_chain_scaling=True,
                                 total_hit_scaling=True
@@ -51,12 +51,12 @@ def default_phases() -> List[Phase]:
                             is_lr_scheduler_active=False,
                             length=15,
                             name="position_color",
-                            plane_normal_rescaling_hook='nsf.model.hooks.alpha_chain_scaling_hook',
+                            plane_normal_rescaling_hook='nag.model.hooks.alpha_chain_scaling_hook',
                             plane_normal_rescaling_hook_kwargs=dict(
                                 alpha_chain_scaling=False,
                                 total_hit_scaling=True
                             ),
-                            plane_position_rescaling_hook='nsf.model.hooks.alpha_chain_scaling_hook',
+                            plane_position_rescaling_hook='nag.model.hooks.alpha_chain_scaling_hook',
                             plane_position_rescaling_hook_kwargs=dict(
                                 alpha_chain_scaling=False,
                                 total_hit_scaling=True
@@ -73,12 +73,12 @@ def default_phases() -> List[Phase]:
                             is_lr_scheduler_active=True,
                             length=-1,
                             name="position_color_flow_view",
-                            plane_normal_rescaling_hook='nsf.model.hooks.alpha_chain_scaling_hook',
+                            plane_normal_rescaling_hook='nag.model.hooks.alpha_chain_scaling_hook',
                             plane_normal_rescaling_hook_kwargs=dict(
                                 alpha_chain_scaling=False,
                                 total_hit_scaling=True
                             ),
-                            plane_position_rescaling_hook='nsf.model.hooks.alpha_chain_scaling_hook',
+                            plane_position_rescaling_hook='nag.model.hooks.alpha_chain_scaling_hook',
                             plane_position_rescaling_hook_kwargs=dict(
                                 alpha_chain_scaling=False,
                                 total_hit_scaling=True
