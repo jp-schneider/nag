@@ -231,3 +231,6 @@ runs
 .launch/*
 log/*
 !data/static/
+notebooks/temp_processing.ipynb
+.github/copilot-instructions.md
+.vscode/nag-processing.code-workspace
