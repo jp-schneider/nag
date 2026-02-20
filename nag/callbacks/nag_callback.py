@@ -254,7 +254,7 @@ def calculate_metrics(
                     outputs_scaled = torch.zeros(
                         len(indices), H, W, C, device=outputs.device, dtype=outputs.dtype)
                 outputs_scaled[ti] = resize_output(
-                    outputs[i].permute(2, 0, 1)).permute(1, 2, 0)
+                    outputs[ti].permute(2, 0, 1)).permute(1, 2, 0)
 
         if targets is None:
             targets = torch.zeros(
