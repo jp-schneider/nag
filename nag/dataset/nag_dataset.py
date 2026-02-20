@@ -551,11 +551,29 @@ class NAGDataset(Dataset):
     def load_mask_stack_idx(self,
                             init_size: bool = True,
                             idx: Optional[Union[int, torch.Tensor]] = None,
-                            progress_bar: bool = DEFAULT) -> np.ndarray:
-        """Load the mask stack
+                            progress_bar: bool = DEFAULT,
+                            native_size: bool = False,
+                            ) -> np.ndarray:
+        """Load the mask stack.
 
         Parameters
-        ---
+        --------
+        init_size: bool, optional
+            If True, load the mask stack with the initial image shape. If False, load the mask stack with the learning image shape. Default is True.
+
+        idx: Optional[Union[int, torch.Tensor]], optional
+            Indices of the frames to load. If None, load all frames. Default is None.
+
+        progress_bar: bool, optional
+            If True, show a progress bar while loading the mask stack. Default is the setting within the config.
+
+        native_size: bool, optional
+            If True, load the mask stack with the native image shape. Default is False.
+
+        Returns
+        ------- 
+        np.ndarray
+            The loaded mask stack. Shape is (T, H, W, N) where T is the number of frames, H and W are the height and width of the masks and N is the number of objects.
 
         """
         if idx is not None:
@@ -565,9 +583,10 @@ class NAGDataset(Dataset):
                 idx = idx.cpu().numpy()
             if isinstance(idx, int):
                 idx = np.array([idx])
-        if not self.cache_masks or init_size:
+        if not self.cache_masks or init_size or native_size:
             shape = self.initial_image_shape if init_size else self.learning_image_shape
-
+            if native_size:
+                shape = None
             pths = dict()
             for ov, col in self._mask_path_ov_columns.items():
                 if idx is not None:
@@ -787,7 +806,8 @@ class NAGDataset(Dataset):
 
     def load_mask(self,
                   idx: Union[int, torch.Tensor] = None,
-                  init_size: bool = False) -> torch.Tensor:
+                  init_size: bool = False,
+                  native_size: bool = False) -> torch.Tensor:
         """Return the mask for the given index.
 
         Parameters
@@ -797,6 +817,8 @@ class NAGDataset(Dataset):
             Shape is (N,) or scalar.
         init_size : bool, optional
             If its the init size or the learning size, by default False
+        native_size : bool, optional
+            If the native size should be loaded, by default False
 
         Returns
         -------
@@ -805,7 +827,7 @@ class NAGDataset(Dataset):
             Returns only the used Object masks in the correct order.
         """
         msk = self.load_mask_stack_idx(
-            init_size=init_size, idx=idx, progress_bar=self.config.use_progress_bar)
+            init_size=init_size, idx=idx, progress_bar=self.config.use_progress_bar, native_size=native_size)
         msk = tensorify_image(msk)
         if msk.shape[0] > 0:
             return msk[:, self.oids_mask]
@@ -813,8 +835,9 @@ class NAGDataset(Dataset):
 
     def load_mask_checked(self,
                           idx: Union[int, torch.Tensor] = None,
-                          init_size: bool = False) -> torch.Tensor:
-        masks = self.load_mask(idx, init_size)
+                          init_size: bool = False,
+                          native_size: bool = False) -> torch.Tensor:
+        masks = self.load_mask(idx, init_size, native_size=native_size)
         ids = self.mask_ids
         # Check if masks are present
         obj_size = masks.sum(dim=(0, 2, 3))

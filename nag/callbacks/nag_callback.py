@@ -24,7 +24,7 @@ from tools.util.torch import tensorify
 from tools.run.config_runner import ConfigRunner
 from tools.transforms.geometric.transforms3d import flatten_batch_dims, rotmat_to_unitquat
 from tools.agent.util.tracker import Tracker
-from tools.logger.logging import logger as logging
+from tools.logger.logging import logger as logging, get_messaged
 from tools.transforms.numpy.min_max import MinMax
 from tools.io.image import put_text, linear_segmented_smoothing, n_layers_alpha_compositing, load_image_stack_generator, save_image_stack, save_image
 from tools.video.utils import write_mp4_generator
@@ -237,24 +237,25 @@ def calculate_metrics(
         _, H, W = target.shape
 
         if HO != H or WO != W:
-            if resize_target is None and H < HO or W < WO:
-                logging.warning(
-                    "Target image is smaller than output size. Resizing to output size.")
-                resize_target = Resize((HO, WO))
             if H < HO or W < WO:
+                if resize_target is None:
+                    if not get_messaged("resize_warning_metrics_resize_target"):
+                        logging.warning(
+                            "Target image is smaller than output size. Resizing to output size. This favors outputs over targets for the metric calculation.")
+                    resize_target = Resize((HO, WO))
                 target = resize_target(target).permute(2, 0, 1)
 
-            if resize_output is None and H > HO or W > WO:
-                logging.info(
-                    "Output image is smaller than target size. Resizing to target size.")
-                resize_output = Resize((H, W))
-
             if H > HO or W > WO:
+                if resize_output is None:
+                    if not get_messaged("resize_warning_metrics_resize_output"):
+                        logging.warning(
+                            "Output image is smaller than target size. Resizing to target size. This favors targets over outputs for the metric calculation.")
+                    resize_output = Resize((H, W))
                 if outputs_scaled is None:
                     outputs_scaled = torch.zeros(
                         len(indices), H, W, C, device=outputs.device, dtype=outputs.dtype)
                 outputs_scaled[ti] = resize_output(
-                    outputs[i].permute(2, 0, 1)).permute(1, 2, 0)
+                    outputs[ti].permute(2, 0, 1)).permute(1, 2, 0)
 
         if targets is None:
             targets = torch.zeros(
@@ -302,28 +303,30 @@ def calculate_mask_metrics(
         target = dataset.load_image(torch.tensor(i), native_size=True)[
             0]  # Loading the target image in native size
         _, H, W = target.shape
-        mask = dataset.load_mask(torch.tensor(i), init_size=False)[0]
+        mask = dataset.load_mask(torch.tensor(i), native_size=True)[0]
 
         if HO != H or WO != W:
-            if resize_target is None and H < HO or W < WO:
-                logging.warning(
-                    "Target image is smaller than output size. Resizing to output size.")
-                resize_target = Resize((HO, WO))
+
             if H < HO or W < WO:
+                if resize_target is None:
+                    if not get_messaged("resize_warning_metrics_mask_resize_target"):
+                        logging.warning(
+                            "Target image is smaller than output size. Resizing to output size. This favors outputs over targets for the metric calculation.")
+                    resize_target = Resize((HO, WO))
                 target = resize_target(target).permute(2, 0, 1)
                 mask = resize_target(mask.float()).permute(2, 0, 1).bool()
 
-            if resize_output is None and H > HO or W > WO:
-                logging.info(
-                    "Output image is smaller than target size. Resizing to target size.")
-                resize_output = Resize((H, W))
-
             if H > HO or W > WO:
+                if resize_output is None:
+                    if not get_messaged("resize_warning_metrics_mask_resize_output"):
+                        logging.warning(
+                            "Output image is smaller than target size. Resizing to target size. This favors targets over outputs for the metric calculation.")
+                    resize_output = Resize((H, W))
                 if outputs_scaled is None:
                     outputs_scaled = torch.zeros(
                         len(indices), H, W, C, device=outputs.device, dtype=outputs.dtype)
                 outputs_scaled[ti] = resize_output(
-                    outputs[i].permute(2, 0, 1)).permute(1, 2, 0)
+                    outputs[ti].permute(2, 0, 1)).permute(1, 2, 0)
 
         if targets is None:
             targets = torch.zeros(
@@ -331,6 +334,7 @@ def calculate_mask_metrics(
         if masks is None:
             masks = torch.zeros(
                 len(indices), H, W, len(dataset.mask_ids), device=outputs.device, dtype=torch.bool)
+        
         targets[ti] = target.permute(1, 2, 0)
         masks[ti] = mask.permute(1, 2, 0)
 
