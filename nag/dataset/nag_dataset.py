@@ -449,7 +449,7 @@ class NAGDataset(Dataset):
             column_contains_empty = NA_cols.any(axis=0)
             # Allow for empty masks, but not for empty images or depth images
             na_values = dict()
-            for na_cols in frame.columns.values[column_containsnag_empty]:
+            for na_cols in frame.columns.values[column_contains_empty]:
                 if na_cols.startswith("mask_path_ov"):
                     continue
                 else:
