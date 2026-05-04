@@ -146,18 +146,16 @@ Surely, there is way more to explore & explain, so feel free to open issues or d
 If you find our work useful in your research, please consider citing our paper:
 
 ```bibtex
-@article{Schneider2025NAG,
-  author    = {Jan Philipp Schneider and
-              Pratik Singh Bisht and
-              Ilya Chugunov and
-              Andreas Kolb and
-              Michael Moeller and
-              Felix Heide},
-  title     = {Neural Atlas Graphs for Dynamic Scene Decomposition and Editing},
-  booktitle = {Advances in Neural Information Processing Systems},
-  year      = {2025},
-  volume    = {38},
-  url       = {https://neurips.cc/virtual/2025/poster/115926},
+@inproceedings{Schneider2025NAG,
+    author = {Schneider, Jan Philipp and Bisht, Pratik S. and Chugunov, Ilya and Kolb, Andreas and Moeller, Michael and Heide, Felix},
+    booktitle = {Advances in Neural Information Processing Systems},
+    editor = {D. Belgrave and C. Zhang and H. Lin and R. Pascanu and P. Koniusz and M. Ghassemi and N. Chen},
+    pages = {14481--14500},
+    publisher = {Curran Associates, Inc.},
+    title = {Neural Atlas Graphs for Dynamic Scene Decomposition and Editing},
+    url = {https://proceedings.neurips.cc/paper_files/paper/2025/file/1534649513e77f7de77772f143799b13-Paper-Conference.pdf},
+    volume = {38},
+    year = {2025}
 }
 ```
 
